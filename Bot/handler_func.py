@@ -22,7 +22,7 @@ def planet_constellation(bot, update):
         planet = update_list[1].capitalize() # planet name
 
         if planet in planet_list: #if name exist in ephem base
-            planet_class = eval(f"ephem.{planet}()") #create class ex like ephem.Mars()
+            planet_class = getattr(ephem, planet)() #create class ex like ephem.Mars()
             planet_class.compute() #magic
             # answer preparing
             answer_text = f'Planet: {planet}\nConstellation: {ephem.constellation(planet_class)}'
